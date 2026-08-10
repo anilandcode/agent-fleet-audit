@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 coverage
 *.log
 graphify-out
+.vercel
