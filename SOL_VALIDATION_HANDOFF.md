@@ -21,6 +21,16 @@
 - Production build: passed
 - Vercel Preview deployment: Ready
 
+## Correction pass completed
+
+- Verified desktop, tablet, and mobile layouts against the production build with no horizontal overflow.
+- Fixed tablet hero badges that clipped at the right viewport edge.
+- Fixed the mobile landing navigation so selecting an anchor closes the menu before scrolling.
+- Fixed the diagnostic form's asynchronous reset so a successful lead request no longer reports a stale React event error.
+- Confirmed the corrected diagnostic request returns the expected demo-success state.
+- Confirmed `/app` mobile navigation and the vendor-review workflow; the workflow expanded the event stream from 6 to 12 records.
+- Confirmed generated images load through the Next image pipeline and the browser console has no warnings or errors.
+
 ## Sol review checklist
 
 1. Inspect the preview at 1440px, 768px, and 390px widths; check the floating nav, hero crop, platform mockup, diagnostic form, and closing section for clipping or weak contrast.

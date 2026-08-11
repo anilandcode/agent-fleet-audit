@@ -11,9 +11,10 @@ export function DiagnosticForm() {
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     setStatus("submitting");
     setMessage("");
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const payload = Object.fromEntries(form.entries());
     try {
       const response = await fetch("/api/v1/leads", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
@@ -21,7 +22,7 @@ export function DiagnosticForm() {
       if (!response.ok) throw new Error(data.error ?? "We could not submit that request.");
       setStatus("success");
       setMessage(data.delivered ? "Request delivered. We will use these details to prepare the right diagnostic conversation." : "Demo request accepted locally. Set LEAD_WEBHOOK_URL before using this form to capture live enquiries.");
-      event.currentTarget.reset();
+      formElement.reset();
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "We could not submit that request.");

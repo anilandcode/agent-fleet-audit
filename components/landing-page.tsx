@@ -4,6 +4,7 @@ import { BrandMark } from "@/components/brand-mark";
 import { DiagnosticForm } from "@/components/diagnostic-form";
 import { LandingDemo } from "@/components/landing-demo";
 import { LandingMotion } from "@/components/landing-motion";
+import { MobileNavigation } from "@/components/mobile-navigation";
 
 const controls = [
   ["01", "Evidence stays connected", "Every action remains linked to its run, policy, tool scope, cost, and resulting evidence."],
@@ -32,7 +33,7 @@ export function LandingPage() {
       <Link href="/" className="brand-link"><BrandMark /></Link>
       <div className="site-links"><a href="#platform">Platform</a><a href="#controls">Controls</a><a href="#engagements">Engagements</a></div>
       <a href="#diagnostic" className="button button-quiet nav-cta">Request a diagnostic <b>↗</b></a>
-      <details className="mobile-menu"><summary aria-label="Open navigation"><span /><span /><span /></summary><div><a href="#platform">Platform</a><a href="#controls">Controls</a><a href="#engagements">Engagements</a><a href="#diagnostic">Request a diagnostic ↗</a></div></details>
+      <MobileNavigation />
     </nav>
 
     <section className="hero shell" data-hero-section>
