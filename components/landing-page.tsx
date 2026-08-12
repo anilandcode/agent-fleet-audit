@@ -5,20 +5,25 @@ import { DiagnosticForm } from "@/components/diagnostic-form";
 import { LandingDemo } from "@/components/landing-demo";
 import { LandingMotion } from "@/components/landing-motion";
 import { MobileNavigation } from "@/components/mobile-navigation";
-import { HeroSystemMap } from "@/components/system-visuals";
+import { ArchitectureFlow, FleetTopology, HeroTerrain } from "@/components/system-visuals";
 
-const controls = [
-  ["01", "Evidence stays connected", "Every action remains linked to its run, policy, tool scope, cost, and resulting evidence."],
-  ["02", "Governance happens before execution", "High-impact tools, sensitive access, and budget thresholds are evaluated before they can act."],
-  ["03", "Your fleet stays legible", "Give engineering, security, and leadership one defensible view of the system they share."],
-];
+const capabilities = ["Architecture", "Evidence", "Policy", "Cost", "Security", "Reliability"];
 
 const pillars = [
   ["Architecture", "Responsibilities, handoffs, workflow state, memory, retrieval, and escalation paths."],
   ["Observability", "Provider-neutral events across models, retrieval, tools, policies, retries, and outcomes."],
   ["Cost governance", "Task, agent, and fleet envelopes with reservation, reconciliation, and stop thresholds."],
   ["Security", "Least-privilege tools, secret boundaries, validated inputs, redaction, and approval gates."],
-  ["Reliability", "Idempotency, bounded retries, fallback behavior, evaluation evidence, and human handoffs."],
+  ["Reliability", "Idempotency, bounded retries, fallback behaviour, evaluation evidence, and human handoffs."],
+];
+
+const failures = [
+  ["01", "Unclear ownership", "No accountable owner when an agent crosses systems."],
+  ["02", "Invisible handoffs", "Work changes hands without a durable operational record."],
+  ["03", "Untraceable context", "Decisions drift away from the evidence that shaped them."],
+  ["04", "Late policy checks", "Controls arrive after a sensitive tool has already acted."],
+  ["05", "Uncontrolled cost", "Retries and parallel paths consume budget without a stop rule."],
+  ["06", "Missing replay", "The team cannot reconstruct the decision when scrutiny arrives."],
 ];
 
 const evidenceSteps = [
@@ -29,7 +34,7 @@ const evidenceSteps = [
 ];
 
 export function LandingPage() {
-  return <LandingMotion><main className="site">
+  return <LandingMotion><main className="site site-v2">
     <nav className="site-nav shell" aria-label="Primary navigation">
       <Link href="/" className="brand-link"><BrandMark /></Link>
       <div className="site-links"><a href="#platform">Platform</a><a href="#controls">Controls</a><a href="#engagements">Engagements</a></div>
@@ -37,46 +42,64 @@ export function LandingPage() {
       <MobileNavigation />
     </nav>
 
-    <section className="hero shell" data-hero-section>
-      <div className="hero-orbit" aria-hidden="true" /><div className="ambient-orb hero-ambient" aria-hidden="true" data-ambient />
-      <div className="hero-copy-block">
-        <span className="kicker" data-hero-kicker>Governed multi-agent operations</span>
-        <h1 data-hero-title>Your agents.<br />Your evidence.<br /><em>Your control.</em></h1>
-        <p data-hero-copy>Agent Fleet Audit makes every decision traceable before it becomes an operational or compliance problem.</p>
-        <div className="hero-actions" data-hero-actions><a href="#diagnostic" className="button button-primary">Request a diagnostic <b>↗</b></a><Link href="/app" className="quiet-link">Open control plane <b>→</b></Link></div>
-      </div>
-      <div className="hero-surface" data-hero-art aria-label="Abstract visualization of governed agents and evidence flows">
-        <Image src="/media/agent-fleet/hero-intelligence-core.png" alt="A sculptural intelligence core inside a governed evidence network" fill priority sizes="(max-width: 900px) 124vw, 68vw" />
-        <div className="hero-core-halo" data-core aria-hidden="true" /><HeroSystemMap />
-        <span className="surface-label label-top">GOVERNED EXECUTION</span><span className="surface-label label-bottom">EVIDENCE LAYER</span>
-        <span className="surface-stat stat-one">12 policies applied</span><span className="surface-stat stat-two">4 approvals scoped</span>
+    <section className="hero-chamber shell" data-hero-section>
+      <div className="hero-frame" data-hero-art>
+        <div className="hero-frame-glow" data-ambient aria-hidden="true" />
+        <div className="hero-frame-line hero-frame-line-a" aria-hidden="true" /><div className="hero-frame-line hero-frame-line-b" aria-hidden="true" />
+        <span className="hero-system-label label-input">Policy-governed input</span>
+        <span className="hero-system-label label-output">Connected evidence layer</span>
+        <div className="hero-centered-copy">
+          <span className="kicker" data-hero-kicker>Governed multi-agent operations</span>
+          <h1 data-hero-title>Your agents.<br />Your evidence.<br /><em>Your control.</em></h1>
+          <p data-hero-copy>Make every agent decision traceable before it becomes an operational or compliance problem.</p>
+          <div className="hero-actions" data-hero-actions><a href="#diagnostic" className="button button-primary">Request a diagnostic <b>↗</b></a><Link href="/app" className="quiet-link">Open control plane <b>→</b></Link></div>
+        </div>
+        <HeroTerrain />
       </div>
     </section>
 
-    <section className="proof-rail"><div className="shell" data-stagger><span>Tenant-aware</span><span>Policy-first</span><span>Evidence-backed</span><span>Framework-agnostic</span></div></section>
+    <section className="capability-rail" aria-label="Audit capabilities"><div className="shell" data-stagger>{capabilities.map((item, index) => <span key={item}><b>0{index + 1}</b>{item}</span>)}</div></section>
 
-    <section id="controls" className="accountability shell section-frame" data-reveal>
+    <section className="editorial-intro shell chapter" data-reveal>
+      <div className="editorial-copy"><span className="kicker">A governed operating model</span><h2>Agent Fleet Audit is how teams govern <em>production agent systems.</em></h2><p>It replaces fragmented logs and individual memory with a connected record of context, evidence, policy, cost, and accountable outcomes.</p><div className="editorial-callout"><b>→</b><span>You have built the agents.<br />Now make the system defensible.</span></div><a href="#platform" className="button button-quiet">Discover the platform <b>↘</b></a></div>
+      <div className="architecture-portrait" data-architecture-art><div className="portrait-glow" data-ambient aria-hidden="true" /><ArchitectureFlow /><span className="architecture-tag tag-context">Context</span><span className="architecture-tag tag-policy-flow">Policy</span><span className="architecture-tag tag-outcome">Outcome</span><div className="portrait-caption"><b>Connected decision record</b><span>Evidence compounds. Accountability persists.</span></div></div>
+    </section>
+
+    <section className="capability-chapter shell chapter" data-reveal>
+      <div className="chapter-heading"><h2>Built for the<br /><em>enterprise reality.</em></h2><p>Audit the operating system as a whole—without flattening architecture, security, cost, and reliability into isolated checklists.</p></div>
+      <div className="capability-mosaic" data-mosaic>
+        {pillars.slice(0, 4).map(([title, copy], index) => <article className="mosaic-card" key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}
+        {pillars.slice(4).map(([title, copy], index) => <article className="mosaic-card mosaic-card-bottom" key={title}><span>0{index + 5}</span><h3>{title}</h3><p>{copy}</p></article>)}
+        <figure className="decision-visual"><Image src="/media/agent-fleet/decision-record-architecture.webp" alt="Abstract evidence layers connecting a decision source to a governed outcome" fill sizes="(max-width: 900px) 100vw, 55vw" /><figcaption><span>Live evidence topology</span><b>Source → policy → approval → outcome</b></figcaption></figure>
+      </div>
+    </section>
+
+    <section className="ownership-section chapter" data-ownership-section>
+      <div className="shell ownership-heading" data-reveal><h2>Who owns the decisions<br />your agents are making?</h2><p><strong>Production agents create an accountability gap:</strong> they move quickly across models, tools, and data boundaries while the evidence needed for review is left behind.</p></div>
+      <div className="ownership-stage" data-ownership-stage><div className="ownership-track" data-ownership-track>{failures.map(([number, title, copy], index) => <article className="failure-card" key={title}><div className="failure-image" style={{ "--atlas-position": `${index * 20}%` } as React.CSSProperties} aria-hidden="true" /><div className="failure-caption"><span>{number}</span><h3>{title}</h3><p>{copy}</p></div></article>)}</div></div>
+      <p className="ownership-swipe-hint shell">Swipe to inspect the six failure patterns →</p>
+    </section>
+
+    <section className="transition-chapter" data-transition-section>
+      <div className="transition-glow" data-ambient aria-hidden="true" /><FleetTopology /><div className="transition-copy" data-reveal><span className="kicker">From fragments to a fleet</span><h2>What changes with<br /><em>Agent Fleet Audit?</em></h2></div>
+    </section>
+
+    <section id="controls" className="accountability-v2 shell chapter" data-reveal>
       <div className="accountability-intro"><span className="kicker">Built for accountability</span><h2>Outputs are not enough.<br /><em>Show the decision path.</em></h2><p>Production agents need a record that survives scrutiny: what was requested, which data was used, which policy applied, and why an action did or did not happen.</p><a href="#platform" className="button button-quiet">Explore the platform <b>↓</b></a></div>
-      <ol className="evidence-path" data-stagger data-timeline><i className="timeline-progress" data-timeline-line aria-hidden="true" />{evidenceSteps.map(([number, title, copy]) => <li key={number}><b>{number}</b><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
+      <ol className="evidence-path" data-timeline><i className="timeline-progress" data-timeline-line aria-hidden="true" />{evidenceSteps.map(([number, title, copy]) => <li key={number}><b>{number}</b><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ol>
     </section>
 
-    <section className="pillar-section shell" data-reveal><div className="section-heading"><div><span className="kicker">The diagnostic lens</span><h2>Five areas where<br /><em>agent systems fail.</em></h2></div><p>The audit moves through the operational system rather than treating security, cost, and traceability as isolated checks.</p></div><div className="pillar-grid" data-stagger>{pillars.map(([title, copy], index) => <article className="pillar-card" key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p><b>Inspect control ↗</b></article>)}</div></section>
+    <section id="platform" className="platform-section-v2 chapter" data-platform-section><div className="platform-field" data-ambient aria-hidden="true" /><div className="shell"><div className="chapter-heading" data-reveal><div><span className="kicker">The control plane</span><h2>One fleet.<br /><em>One defensible view.</em></h2></div><p>Move from disconnected agent logs to a readable system of policies, traces, evidence, and accountable outcomes.</p></div><div data-product-window data-reveal><LandingDemo /></div></div></section>
 
-    <section id="platform" className="platform-section" data-platform-section><div className="platform-wash" data-platform-art><Image src="/media/agent-fleet/evidence-layers.png" alt="" fill sizes="100vw" /></div><div className="ambient-orb platform-ambient" aria-hidden="true" data-ambient /><div className="shell platform-content"><div className="section-heading" data-reveal><div><span className="kicker">The platform</span><h2>One fleet.<br /><em>One control surface.</em></h2></div><p>Move from disconnected agent logs to a readable system of policies, traces, evidence, and accountable outcomes.</p></div><div data-reveal><LandingDemo /></div></div></section>
+    <section id="engagements" className="commercial-chapter shell chapter" data-reveal>
+      <div className="chapter-heading"><div><span className="kicker">How we work</span><h2>Start with the fleet<br /><em>you already have.</em></h2></div><p>A focused services offer for technical teams moving agents from promising prototype to governed production system.</p></div>
+      <div className="engagement-grid" data-stagger><article><span>01 / Diagnostic</span><h3>Fleet Diagnostic</h3><strong>From $1,500</strong><p>3–5 business days. Architecture map, readiness score, prioritized findings, and a technical readout.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request diagnostic <b>↗</b></a></article><article className="featured-offer"><span>02 / Remediation</span><h3>Stabilization Sprint</h3><strong>From $7,500</strong><p>2–3 weeks. Trace repair, tool controls, budgets, approvals, and an implementation-ready operating model.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Stabilization">Scope a sprint <b>↗</b></a></article><article><span>03 / Governance</span><h3>Managed Governance</h3><strong>From $2,500/mo</strong><p>Ongoing health reviews, anomaly monitoring, control validation, and quarterly resilience exercises.</p><a href="mailto:hello@flowmarc.com?subject=Managed%20Agent%20Governance">Discuss governance <b>↗</b></a></article></div>
+    </section>
 
-    <section className="control-section shell" data-reveal><div className="control-grid" data-stagger>{controls.map(([number, title, copy], index) => <article className={index === 1 ? "control-card lit" : "control-card"} key={number}><span>{number}</span><i className="control-icon">{index === 0 ? "↗" : index === 1 ? "◌" : "⌁"}</i><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
+    <section id="diagnostic" className="conversion-chapter"><div className="shell conversion-layout" data-reveal><div className="conversion-copy"><span className="kicker">Start with evidence</span><h2>Tell us where the<br /><em>fleet feels fragile.</em></h2><p>Share enough context to make the first conversation useful. This is an intake for a technical diagnostic—not a generic sales funnel.</p><ul><li>Architecture and repository review</li><li>Readiness score and ranked findings</li><li>30/60/90-day stabilization path</li></ul></div><DiagnosticForm /></div>
+      <div className="shell utility-grid" data-reveal><div className="proof-assets"><a href="/api/v1/reports/demo/export"><span>01</span><strong>Sample redacted diagnostic report</strong><b>Download ↗</b></a><a href="#platform"><span>02</span><strong>Vendor-risk audit replay</strong><b>Explore ↘</b></a><a href="#controls"><span>03</span><strong>Five control areas to inspect</strong><b>Review ↘</b></a></div><div className="faq-compact"><details><summary>Which agent stacks can you audit?</summary><p>LangGraph, CrewAI, custom TypeScript or Python orchestration, MCP tools, retrieval systems, and mixed production estates.</p></details><details><summary>Do you need access to raw prompts?</summary><p>No. The diagnostic can start with repository, architecture, traces, configuration, and redacted examples.</p></details><details><summary>What does a diagnostic produce?</summary><p>A readiness score, architecture map, severity-ranked findings, and a prioritized implementation path.</p></details><details><summary>Can you work with an existing observability tool?</summary><p>Yes. A provider-neutral event model keeps existing tracing and provider choices portable.</p></details></div></div>
+    </section>
 
-    <section className="operational-story shell" data-reveal data-story-section><div className="operational-copy"><span className="kicker">Operational clarity</span><h2>Build for the review<br /><em>you have not had yet.</em></h2><p>Governance becomes durable when the system can explain itself without relying on individual memory, raw prompt retention, or fragile tooling.</p><a href="#diagnostic" className="button button-quiet">Review your fleet <b>↗</b></a></div><div className="story-stack" data-story-stack><article className="story-card story-card-one"><span>01 / Continuity</span><h3>Evidence remains connected</h3><p>Every action can be traced back to the context, tools, policy, and approval that shaped it.</p><i aria-hidden="true" /></article><article className="story-card story-card-two"><span>02 / Control</span><h3>Governance precedes execution</h3><p>High-impact paths are reviewed before the action enters the operational system.</p><i aria-hidden="true" /></article><article className="story-card story-card-three"><span>03 / Reliability</span><h3>The fleet stays legible</h3><p>Engineering, security, and leadership share one defensible view of system behaviour.</p><i aria-hidden="true" /></article></div></section>
-
-    <section id="engagements" className="engagements shell" data-reveal><div className="section-heading"><div><span className="kicker">How we work</span><h2>Start with the fleet<br /><em>you already have.</em></h2></div><p>A focused services offer for technical teams moving agents from promising prototype to governed production system.</p></div><div className="engagement-grid" data-stagger><article><span>01 / Diagnostic</span><h3>Fleet Diagnostic</h3><strong>From $1,500</strong><p>3–5 business days. Architecture map, readiness score, prioritized findings, and a technical readout.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request diagnostic <b>↗</b></a></article><article className="featured-offer"><span>02 / Remediation</span><h3>Stabilization Sprint</h3><strong>From $7,500</strong><p>2–3 weeks. Trace repair, tool controls, budgets, approvals, and an implementation-ready operating model.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Stabilization">Scope a sprint <b>↗</b></a></article><article><span>03 / Governance</span><h3>Managed Governance</h3><strong>From $2,500/mo</strong><p>Ongoing health reviews, anomaly monitoring, control validation, and quarterly resilience exercises.</p><a href="mailto:hello@flowmarc.com?subject=Managed%20Agent%20Governance">Discuss governance <b>↗</b></a></article></div></section>
-
-    <section id="diagnostic" className="diagnostic-section"><div className="diagnostic-art"><Image src="/media/agent-fleet/governance-gallery.png" alt="" fill sizes="100vw" /></div><div className="shell diagnostic-layout" data-reveal><div><span className="kicker">Start with evidence</span><h2>Tell us where the<br /><em>fleet feels fragile.</em></h2><p>Share enough context to make the first conversation useful. This is an intake for a technical diagnostic—not a generic sales funnel.</p><ul><li>Architecture and repository review</li><li>Readiness score and ranked findings</li><li>30/60/90-day stabilization path</li></ul></div><DiagnosticForm /></div></section>
-
-    <section className="proof-section shell" data-reveal><div className="proof-copy"><span className="kicker">Proof assets</span><h2>Useful before<br /><em>the call.</em></h2><p>Downloadable materials are represented by the live demo report today. A production deployment can route these to your CMS, email automation, and calendar provider.</p></div><div className="proof-assets" data-stagger><a href="/api/v1/reports/demo/export"><span>01</span><strong>Sample redacted diagnostic report</strong><b>Download ↗</b></a><a href="#platform"><span>02</span><strong>Vendor-risk audit replay</strong><b>Explore ↘</b></a><a href="#controls"><span>03</span><strong>Five control areas to inspect</strong><b>Review ↘</b></a></div></section>
-
-    <section className="faq-section shell" data-reveal><span className="kicker">FAQ</span><h2>Questions technical teams<br /><em>ask before the audit.</em></h2><div className="faq-grid" data-stagger><details><summary>Which agent stacks can you audit?</summary><p>LangGraph, CrewAI, custom TypeScript or Python orchestration, MCP tools, retrieval systems, and mixed production estates.</p></details><details><summary>Do you need access to raw prompts?</summary><p>No. The diagnostic can start with repository, architecture, traces, configuration, and redacted examples. Sensitive data stays within agreed boundaries.</p></details><details><summary>What does a diagnostic produce?</summary><p>A readiness score, an architecture map, severity-ranked findings, and a prioritized 30/60/90-day implementation path.</p></details><details><summary>Can you work with an existing observability tool?</summary><p>Yes. The approach begins with a provider-neutral event model so existing tracing and provider choices remain portable.</p></details></div></section>
-
-    <section className="closing"><div className="closing-image"><Image src="/media/agent-fleet/evidence-layers.png" alt="" fill sizes="100vw" /></div><div className="closing-beam" aria-hidden="true" data-ambient /><div className="shell"><span className="kicker">Agent Fleet Audit</span><h2>Governed.<br /><em>Traceable.</em> Yours.</h2><a className="button button-primary" href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request a diagnostic <b>↗</b></a><strong className="closing-wordmark" aria-hidden="true">AGENT FLEET AUDIT</strong></div></section>
-    <footer className="site-footer shell"><span>© 2026 Flowmarc Creative</span><span>Production agent architecture, not a security certification.</span><Link href="/app">Control plane demo ↗</Link></footer>
+    <footer className="reference-footer"><div className="shell footer-main"><div><BrandMark /><h2>Governed. Traceable. Yours.</h2><a className="button button-quiet" href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request a diagnostic <b>↗</b></a></div><nav aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#controls">Controls</a><a href="#engagements">Engagements</a><Link href="/app">Control plane</Link></nav><div className="footer-legal"><span>Production agent architecture</span><span>Not a security certification</span></div></div><div className="shell footer-wordmark" aria-hidden="true">AGENT FLEET AUDIT</div><div className="shell footer-base"><span>© 2026 Flowmarc Creative</span><span>Evidence before impact.</span></div></footer>
   </main></LandingMotion>;
 }
