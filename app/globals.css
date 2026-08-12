@@ -10,6 +10,8 @@
   --line-soft: rgba(244, 241, 232, .08);
   --danger: #e58d7c;
   --good: #b9d0a4;
+  --font-sans: "Space Grotesk Variable";
+  --font-mono: "IBM Plex Mono";
 }
 
 * { box-sizing: border-box; }

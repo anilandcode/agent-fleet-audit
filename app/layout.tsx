@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Manrope } from "next/font/google";
+import "@fontsource-variable/space-grotesk";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
 import "./globals.css";
-
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
-const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono", display: "swap" });
+import "./landing-redesign.css";
 
 export const metadata: Metadata = {
   title: "Agent Fleet Audit — Production agent governance",
@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={`${manrope.variable} ${plexMono.variable}`}>{children}</body></html>;
+  return <html lang="en"><body>{children}</body></html>;
 }
