@@ -4,6 +4,8 @@ import { DiagnosticForm } from "@/components/diagnostic-form";
 import { LandingDemo } from "@/components/landing-demo";
 import { LandingMotion } from "@/components/landing-motion";
 import { MobileNavigation } from "@/components/mobile-navigation";
+import { MotionFaq } from "@/components/motion-faq";
+import { MotionAnchor, MotionCard, MotionProvider } from "@/components/motion-ui";
 import { ArchitectureFlow, FleetTopology, HeroTerrain } from "@/components/system-visuals";
 
 const capabilities = ["Architecture", "Evidence", "Policy", "Cost", "Security", "Reliability"];
@@ -77,25 +79,37 @@ function ResponsiveAsset({ asset, alt, className }: { asset: string; alt: string
   </picture>;
 }
 
+function ExpansionAsset({ asset, alt, className, eager = false }: { asset: string; alt: string; className?: string; eager?: boolean }) {
+  const root = "/media/agent-fleet/visual-expansion";
+  return <picture className={className}>
+    <source srcSet={`${root}/${asset}.avif`} type="image/avif" />
+    <img src={`${root}/${asset}.webp`} alt={alt} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding={eager ? "sync" : "async"} />
+  </picture>;
+}
+
 export function LandingPage() {
-  return <LandingMotion>
+  return <MotionProvider><LandingMotion>
     <div className="reference-stage">
       <main className="site site-v2" data-site-canvas>
         <a className="skip-link" href="#main-content">Skip to content</a>
-        <nav className="site-nav shell" aria-label="Primary navigation">
-          <Link href="/" className="brand-link"><BrandMark /></Link>
-          <div className="site-links">
-            <a href="#platform">Platform</a>
-            <a href="#controls">Controls</a>
-            <a href="#engagements">Engagements</a>
-          </div>
-          <a href="#diagnostic" className="button button-quiet nav-cta">Request a diagnostic <b>↗</b></a>
-          <MobileNavigation />
-        </nav>
+        <header className="site-header" data-site-header>
+          <nav className="site-nav" aria-label="Primary navigation">
+            <Link href="/" className="brand-link"><BrandMark /></Link>
+            <div className="site-links">
+              <MotionAnchor href="#platform">Platform</MotionAnchor>
+              <MotionAnchor href="#controls">Controls</MotionAnchor>
+              <MotionAnchor href="#engagements">Engagements</MotionAnchor>
+            </div>
+            <MotionAnchor href="#diagnostic" className="button button-quiet nav-cta" arrow="↗">Request a diagnostic</MotionAnchor>
+            <MobileNavigation />
+          </nav>
+          <i className="header-progress" data-header-progress aria-hidden="true" />
+        </header>
 
         <div id="main-content">
           <section className="hero-chamber shell" data-hero-section>
             <div className="hero-frame" data-hero-art>
+              <ExpansionAsset className="hero-raster" asset="hero-intelligence" alt="" eager />
               <div className="hero-frame-glow" data-ambient aria-hidden="true" />
               <div className="hero-frame-line hero-frame-line-a" aria-hidden="true" />
               <div className="hero-frame-line hero-frame-line-b" aria-hidden="true" />
@@ -106,7 +120,7 @@ export function LandingPage() {
                 <h1 data-hero-title>Your agents.<br />Your evidence.<br /><em>Your control.</em></h1>
                 <p data-hero-copy>Make every agent decision traceable before it becomes an operational or compliance problem.</p>
                 <div className="hero-actions" data-hero-actions>
-                  <a href="#diagnostic" className="button button-primary">Request a diagnostic <b>↗</b></a>
+                  <MotionAnchor href="#diagnostic" className="button button-primary" arrow="↗">Request a diagnostic</MotionAnchor>
                   <Link href="/app" className="quiet-link">Open control plane <b>→</b></Link>
                 </div>
               </div>
@@ -124,9 +138,10 @@ export function LandingPage() {
               <h2>Agent Fleet Audit is how teams govern <em>production agent systems.</em></h2>
               <p>It replaces fragmented logs and individual memory with a connected record of context, evidence, policy, cost, and accountable outcomes.</p>
               <div className="editorial-callout"><b>→</b><span>You have built the agents.<br />Now make the system defensible.</span></div>
-              <a href="#platform" className="button button-quiet">Discover the platform <b>↘</b></a>
+              <MotionAnchor href="#platform" className="button button-quiet" arrow="↘">Discover the platform</MotionAnchor>
             </div>
             <div className="architecture-portrait" data-architecture-art>
+              <ExpansionAsset className="editorial-raster" asset="editorial-intelligence" alt="An original abstract intelligence form made from graphite contours and fine evidence filaments." />
               <div className="portrait-glow" data-ambient aria-hidden="true" />
               <ArchitectureFlow />
               <span className="architecture-tag tag-context">Context</span>
@@ -151,6 +166,32 @@ export function LandingPage() {
             </div>
           </section>
 
+          <section className="architecture-chapter shell chapter" data-architecture-board>
+            <div className="architecture-heading" data-reveal>
+              <span className="kicker">System architecture</span>
+              <h2>Designed as infrastructure,<br /><em>readable as evidence.</em></h2>
+              <p>Each layer keeps its own responsibility while contributing to one connected decision record.</p>
+            </div>
+            <div className="architecture-board">
+              <MotionCard className="architecture-panel tenant-panel">
+                <div className="architecture-panel-copy"><span>01 / Isolation</span><h3>Single-tenant architecture</h3><p>Your policies, traces, and operational memory remain inside a governed boundary.</p></div>
+                <div className="tenant-diagram" aria-hidden="true"><small>Customer tenant</small><i /><div><b>Evidence memory</b><b>Agent fleet</b><b>Policy gates</b></div><em>Dedicated environment</em></div>
+              </MotionCard>
+              <MotionCard className="architecture-panel collaboration-panel">
+                <div className="architecture-panel-copy"><span>02 / Orchestration</span><h3>Multi-agent collaboration</h3><p>Agents coordinate through explicit context, evidence, and approval paths.</p></div>
+                <div className="collaboration-map" aria-hidden="true"><i className="map-core">Shared record</i><b className="map-tag map-ops">Ops</b><b className="map-tag map-legal">Legal</b><b className="map-tag map-risk">Risk</b><b className="map-tag map-strategy">Strategy</b></div>
+              </MotionCard>
+              <MotionCard className="architecture-panel audit-panel">
+                <div className="architecture-panel-copy"><span>03 / Provenance</span><h3>Built-in auditability</h3><p>Versioned evidence makes every decision traceable and replayable.</p></div>
+                <div className="audit-layers" aria-hidden="true"><i /><i /><i /><b>V1</b><b>V2</b><b>V3</b></div>
+              </MotionCard>
+              <MotionCard className="architecture-panel routing-panel">
+                <div className="architecture-panel-copy"><span>04 / Portability</span><h3>Provider-neutral routing</h3><p>Model choices can change without breaking the evidence contract.</p></div>
+                <div className="routing-orbit" aria-hidden="true"><i /><b>Primary</b><b>Fallback</b><b>Private</b></div>
+              </MotionCard>
+            </div>
+          </section>
+
           <section className="ownership-section chapter" data-ownership-section>
             <div className="shell ownership-heading" data-reveal>
               <h2>Who owns the decisions<br />your agents are making?</h2>
@@ -167,6 +208,37 @@ export function LandingPage() {
             <p className="ownership-swipe-hint shell">Swipe to inspect the six failure patterns →</p>
           </section>
 
+          <section className="owned-intelligence shell chapter" data-owned-intelligence>
+            <div className="owned-intelligence-heading" data-reveal>
+              <h2>Own your<br />compounding<br /><em>advantage.</em></h2>
+              <p>This is infrastructure that becomes yours: your operating context, your policies, your evidence, and your institutional memory. Nothing needs to be shared with a competing system to become more useful over time.</p>
+            </div>
+            <div className="owned-topology" data-owned-topology>
+              <ArchitectureFlow />
+              <span className="owned-core">Decision<br />record</span>
+              <b className="owned-tag owned-legal">Legal</b><b className="owned-tag owned-ops">Ops</b><b className="owned-tag owned-strategy">Strategy</b><b className="owned-tag owned-risk">Risk</b><b className="owned-tag owned-policy">Policies</b><b className="owned-tag owned-security">Security</b>
+            </div>
+            <div className="brand-world" aria-label="Architectural environments representing governed operational intelligence">
+              <MotionCard className="brand-scene brand-scene-wide"><ExpansionAsset asset="brand-lobby" alt="A cinematic graphite lobby with a restrained champagne wall light and original circular relief." /><div><span>01 / Context</span><h3>A clear operating world</h3><p>Responsibility becomes visible before action begins.</p></div></MotionCard>
+              <MotionCard className="brand-scene"><ExpansionAsset asset="brand-escalator" alt="A dark graphite escalator hall with thin olive light lines and a blank illuminated wall." /><div><span>02 / Handoffs</span><h3>Movement with memory</h3><p>Every transition retains its operational context.</p></div></MotionCard>
+              <MotionCard className="brand-scene"><ExpansionAsset asset="brand-gallery" alt="A quiet graphite gallery with an abstract empty light panel and champagne illumination." /><div><span>03 / Evidence</span><h3>Signals that persist</h3><p>Reviewable evidence stays attached to the outcome.</p></div></MotionCard>
+            </div>
+          </section>
+
+          <section className="memory-chapter shell chapter" data-memory-chapter>
+            <div className="memory-copy" data-reveal>
+              <span className="kicker">Institutional knowledge</span>
+              <h2>Knowledge should<br /><em>compound, not reset.</em></h2>
+              <p>The fleet becomes more accountable with each governed interaction. Context survives handoffs, evidence remains reviewable, and operational learning returns to the system.</p>
+              <ul><li>Context retention across runs and teams</li><li>Evidence persistence without raw prompt capture</li><li>Operational memory linked to policy and outcome</li></ul>
+            </div>
+            <div className="memory-stack" data-memory-stack>
+              <MotionCard className="memory-card"><ExpansionAsset asset="memory-context" alt="An anonymous expert behind architectural glass with subtle persistent evidence traces." /><div><span>01 / Context retention</span><h3>Keep the reasoning environment</h3></div></MotionCard>
+              <MotionCard className="memory-card"><ExpansionAsset asset="memory-evidence" alt="A cinematic translucent archive of graphite layers connected by a warm evidence filament." /><div><span>02 / Evidence persistence</span><h3>Preserve what shaped the outcome</h3></div></MotionCard>
+              <MotionCard className="memory-card"><ExpansionAsset asset="editorial-intelligence" alt="An abstract graphite intelligence form with layered contours representing operational memory." /><div><span>03 / Operational memory</span><h3>Return learning to the fleet</h3></div></MotionCard>
+            </div>
+          </section>
+
           <section className="transition-chapter" data-transition-section>
             <div className="transition-glow" data-ambient aria-hidden="true" />
             <FleetTopology />
@@ -178,7 +250,7 @@ export function LandingPage() {
               <span className="kicker">Built for accountability</span>
               <h2>Outputs are not enough.<br /><em>Show the decision path.</em></h2>
               <p>Production agents need a record that survives scrutiny: what was requested, which data was used, which policy applied, and why an action did or did not happen.</p>
-              <a href="#platform" className="button button-quiet">Explore the platform <b>↓</b></a>
+              <MotionAnchor href="#platform" className="button button-quiet" arrow="↓">Explore the platform</MotionAnchor>
             </div>
             <ol className="evidence-path" data-timeline>
               <i className="timeline-progress" data-timeline-line aria-hidden="true" />
@@ -225,18 +297,13 @@ export function LandingPage() {
                 <a href="#platform"><span>02</span><strong>Vendor-risk audit replay</strong><b>Explore ↘</b></a>
                 <a href="#controls"><span>03</span><strong>Five control areas to inspect</strong><b>Review ↘</b></a>
               </div>
-              <div className="faq-compact">
-                <details><summary>Which agent stacks can you audit?</summary><p>LangGraph, CrewAI, custom TypeScript or Python orchestration, MCP tools, retrieval systems, and mixed production estates.</p></details>
-                <details><summary>Do you need access to raw prompts?</summary><p>No. The diagnostic can start with repository, architecture, traces, configuration, and redacted examples.</p></details>
-                <details><summary>What does a diagnostic produce?</summary><p>A readiness score, architecture map, severity-ranked findings, and a prioritized implementation path.</p></details>
-                <details><summary>Can you work with an existing observability tool?</summary><p>Yes. A provider-neutral event model keeps existing tracing and provider choices portable.</p></details>
-              </div>
+              <MotionFaq />
             </div>
           </section>
 
           <footer className="reference-footer">
             <div className="shell footer-main">
-              <div><BrandMark /><h2>Governed. Traceable. Yours.</h2><a className="button button-quiet" href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request a diagnostic <b>↗</b></a></div>
+              <div><BrandMark /><h2>Governed. Traceable. Yours.</h2><MotionAnchor className="button button-quiet" href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic" arrow="↗">Request a diagnostic</MotionAnchor></div>
               <nav aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#controls">Controls</a><a href="#engagements">Engagements</a><Link href="/app">Control plane</Link></nav>
               <div className="footer-legal"><span>Production agent architecture</span><span>Not a security certification</span></div>
             </div>
@@ -246,5 +313,5 @@ export function LandingPage() {
         </div>
       </main>
     </div>
-  </LandingMotion>;
+  </LandingMotion></MotionProvider>;
 }
