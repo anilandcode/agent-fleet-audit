@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 const links = [
   ["Platform", "#platform"],
@@ -10,14 +10,16 @@ const links = [
 ];
 
 export function MobileNavigation() {
-  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const [open, setOpen] = useState(false);
 
-  function closeMenu() {
-    detailsRef.current?.removeAttribute("open");
-  }
+  useEffect(() => {
+    const closeOnHashChange = () => setOpen(false);
+    window.addEventListener("hashchange", closeOnHashChange);
+    return () => window.removeEventListener("hashchange", closeOnHashChange);
+  }, []);
 
-  return <details className="mobile-menu" ref={detailsRef}>
-    <summary aria-label="Open navigation"><span /><span /><span /></summary>
-    <div>{links.map(([label, href]) => <a href={href} key={href} onClick={closeMenu}>{label}</a>)}</div>
-  </details>;
+  return <div className={open ? "mobile-menu open" : "mobile-menu"}>
+    <button type="button" className="mobile-menu-toggle" aria-label="Open navigation" aria-expanded={open} onClick={() => setOpen((current) => !current)}><span /><span /><span /></button>
+    <div>{links.map(([label, href]) => <a href={href} key={href} onClick={() => setOpen(false)}>{label}</a>)}</div>
+  </div>;
 }

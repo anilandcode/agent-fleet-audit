@@ -8,5 +8,6 @@ coverage
 *.log
 graphify-out
 .vercel
+artifacts
 .env*
 !.env.example

@@ -13,11 +13,22 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
   useGSAP(() => {
     const media = gsap.matchMedia();
 
-    media.add("(prefers-reduced-motion: no-preference)", () => {
+    media.add({
+      allowMotion: "(prefers-reduced-motion: no-preference)",
+      reduceMotion: "(prefers-reduced-motion: reduce)",
+    }, (context) => {
+      const { allowMotion } = context.conditions as { allowMotion: boolean; reduceMotion: boolean };
+      if (!allowMotion) {
+        gsap.set("[data-reveal], [data-stagger] > *, [data-mosaic] > *, .topology-nodes circle, .terrain-line", { clearProps: "all" });
+        gsap.set("[data-timeline-line]", { scaleY: 1, transformOrigin: "top" });
+        return;
+      }
+
       const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
       hero.from("[data-hero-art]", { autoAlpha: 0, scale: 1.012, duration: 1.1 })
         .from("[data-hero-kicker], [data-hero-title], [data-hero-copy], [data-hero-actions]", { autoAlpha: 0, y: 20, duration: .75, stagger: .09 }, "<.12")
-        .from(".terrain-chip, .hero-system-label, .terrain-node", { autoAlpha: 0, scale: .75, duration: .5, stagger: .045 }, "<.28");
+        .from(".terrain-chip, .hero-system-label, .terrain-node", { autoAlpha: 0, scale: .75, duration: .5, stagger: .045 }, "<.28")
+        .from("[data-capability-rail] > *", { autoAlpha: 0, y: 8, duration: .45, stagger: .045 }, "<.18");
 
       gsap.utils.toArray<SVGPathElement>(".terrain-line, .terrain-route, .architecture-route, .trace-path").forEach((path) => {
         const length = path.getTotalLength();
@@ -40,12 +51,31 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
       gsap.from(".topology-nodes circle", { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%", duration: .55, stagger: .04, scrollTrigger: { trigger: "[data-transition-section]", start: "top 58%", once: true } });
     });
 
-    media.add("(min-width: 761px) and (prefers-reduced-motion: no-preference)", () => {
+    media.add({
+      desktop: "(min-width: 761px)",
+      allowMotion: "(prefers-reduced-motion: no-preference)",
+    }, (context) => {
+      const { desktop, allowMotion } = context.conditions as { desktop: boolean; allowMotion: boolean };
+      if (!desktop || !allowMotion) return;
+
       const track = root.current?.querySelector<HTMLElement>("[data-ownership-track]");
       const stage = root.current?.querySelector<HTMLElement>("[data-ownership-stage]");
       if (track && stage) {
         const horizontalDistance = () => Math.max(0, track.scrollWidth - stage.clientWidth);
-        gsap.to(track, { x: () => -horizontalDistance(), ease: "none", scrollTrigger: { trigger: "[data-ownership-section]", start: "top top", end: () => `+=${Math.max(horizontalDistance(), 900)}`, scrub: .7, pin: true, invalidateOnRefresh: true, anticipatePin: 1 } });
+        gsap.to(track, {
+          x: () => -horizontalDistance(),
+          ease: "none",
+          scrollTrigger: {
+            trigger: "[data-ownership-section]",
+            start: "top top",
+            end: () => `+=${Math.max(horizontalDistance(), 720)}`,
+            scrub: .7,
+            pin: true,
+            pinSpacing: true,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+          },
+        });
       }
 
       gsap.to(".hero-terrain", { yPercent: 9, ease: "none", scrollTrigger: { trigger: "[data-hero-section]", start: "top top", end: "bottom top", scrub: .6 } });
@@ -54,7 +84,9 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
     });
 
     let active = true;
-    document.fonts.ready.then(() => { if (active) ScrollTrigger.refresh(); });
+    document.fonts.ready.then(() => {
+      if (active) ScrollTrigger.refresh();
+    });
     return () => { active = false; media.revert(); };
   }, { scope: root });
 
