@@ -107,7 +107,7 @@ export function LandingPage() {
               <MotionAnchor href="#engagements">Engagements</MotionAnchor>
             </div>
             <div className="nav-actions">
-              <MotionAnchor href="#demo" className="button button-quiet nav-demo">View demo</MotionAnchor>
+              <MotionAnchor href="/app" className="button button-quiet nav-demo">View demo</MotionAnchor>
               <MotionAnchor href="#diagnostic" className="button button-quiet nav-cta">Request a diagnostic</MotionAnchor>
             </div>
             <MobileNavigation />

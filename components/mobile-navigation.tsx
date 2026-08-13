@@ -7,7 +7,7 @@ const links = [
   ["Platform", "#platform"],
   ["Controls", "#controls"],
   ["Engagements", "#engagements"],
-  ["View demo", "#demo"],
+  ["View demo", "/app"],
   ["Request a diagnostic", "#diagnostic"],
 ];
 
