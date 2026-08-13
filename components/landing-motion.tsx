@@ -26,8 +26,7 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
 
       const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
       hero.from("[data-hero-art]", { autoAlpha: 0, scale: 1.012, duration: 1.1 })
-        .from("[data-hero-kicker], [data-hero-title], [data-hero-copy], [data-hero-actions]", { autoAlpha: 0, y: 20, duration: .75, stagger: .09 }, "<.12")
-        .from("[data-capability-rail] > *", { autoAlpha: 0, y: 8, duration: .45, stagger: .045 }, "<.18");
+        .from("[data-hero-kicker], [data-hero-title], [data-hero-copy], [data-hero-actions]", { autoAlpha: 0, y: 20, duration: .75, stagger: .09 }, "<.12");
 
       gsap.utils.toArray<SVGPathElement>(".architecture-route").forEach((path) => {
         const length = path.getTotalLength();

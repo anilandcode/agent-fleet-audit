@@ -8,8 +8,6 @@ import { MotionFaq } from "@/components/motion-faq";
 import { MotionAnchor, MotionCard, MotionProvider } from "@/components/motion-ui";
 import { ArchitectureFlow } from "@/components/system-visuals";
 
-const capabilities = ["Architecture", "Evidence", "Policy", "Cost", "Security", "Reliability"];
-
 const capabilityCards = [
   ["Architecture", "Responsibilities, handoffs, workflow state, memory, retrieval, and escalation paths."],
   ["Evidence", "Provider-neutral provenance across models, retrieval, tools, decisions, and outcomes."],
@@ -108,7 +106,10 @@ export function LandingPage() {
               <MotionAnchor href="#controls">Controls</MotionAnchor>
               <MotionAnchor href="#engagements">Engagements</MotionAnchor>
             </div>
-            <MotionAnchor href="#diagnostic" className="button button-quiet nav-cta">Request a diagnostic</MotionAnchor>
+            <div className="nav-actions">
+              <MotionAnchor href="#demo" className="button button-quiet nav-demo">View demo</MotionAnchor>
+              <MotionAnchor href="#diagnostic" className="button button-quiet nav-cta">Request a diagnostic</MotionAnchor>
+            </div>
             <MobileNavigation />
           </nav>
           <i className="header-progress" data-header-progress aria-hidden="true" />
@@ -128,10 +129,6 @@ export function LandingPage() {
                 </div>
               </div>
             </div>
-          </section>
-
-          <section className="capability-rail" aria-label="Audit capabilities">
-            <div className="shell" data-capability-rail>{capabilities.map((item, index) => <span key={item}><b>0{index + 1}</b>{item}</span>)}</div>
           </section>
 
           <section className="editorial-intro shell chapter" data-reveal>
@@ -265,6 +262,7 @@ export function LandingPage() {
 
           <section id="platform" className="platform-section-v2 chapter" data-platform-section>
             <div className="platform-field" data-ambient aria-hidden="true" />
+            <span className="demo-anchor" id="demo" aria-hidden="true" />
             <div className="shell">
               <div className="chapter-heading" data-reveal>
                 <div><span className="kicker">The control plane</span><h2>One fleet.<br /><em>One defensible view.</em></h2></div>

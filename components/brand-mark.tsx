@@ -4,12 +4,12 @@ type BrandMarkProps = {
 
 export function BrandMark({ compact = false }: BrandMarkProps) {
   return <span className={compact ? "brand-mark brand-mark-compact" : "brand-mark"} aria-label="Agent Fleet Audit">
-    <svg viewBox="0 0 34 34" aria-hidden="true" focusable="false">
-      <circle cx="17" cy="17" r="12.25" />
-      <circle cx="17" cy="17" r="5.25" />
-      <path d="M4.75 17h7M22.25 17h7M17 4.75v7M17 22.25v7" />
-      <circle className="brand-mark-node" cx="26.6" cy="10.4" r="1.9" />
+    <svg viewBox="0 0 42 42" aria-hidden="true" focusable="false">
+      <path d="M33.7 31.6A16.5 16.5 0 1 1 34.5 11" />
+      <path d="M31.1 29.2A13 13 0 1 1 32.2 13" />
+      <path d="M28.4 26.9A9.7 9.7 0 1 1 29.8 15.2" />
+      <path d="M25.8 24.6A6.4 6.4 0 1 1 27.3 17.7" />
     </svg>
-    {!compact && <span className="brand-mark-word">Agent Fleet <em>Audit</em></span>}
+    {!compact && <span className="brand-mark-word">Agent Fleet Audit</span>}
   </span>;
 }
