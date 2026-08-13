@@ -1,5 +1,7 @@
 # 5.6 Sol Validation Handoff — Reference-Fidelity Visual and Motion Expansion
 
+> **Historical snapshot:** this file records the visual-expansion review at that point in time. Its branch, preview, and blocker details may be stale. Current truth is maintained in [`../README.md`](../README.md), [`../DESIGN.md`](../DESIGN.md), and [`PRODUCTION_READINESS.md`](PRODUCTION_READINESS.md).
+
 ## Review target
 
 - Branch: `codex/symphoniq-layout-clone`
