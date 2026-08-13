@@ -1,6 +1,8 @@
 # Multi-Agent Architecture & Agent Fleet Audit
 ## End-to-End Offer, Demo, and Landing-Page Plan
 
+> **Original plan:** this document preserves the product and delivery rationale. It includes future-state goals and must not be treated as evidence that every integration is live. See [`README.md`](README.md), [`DESIGN.md`](DESIGN.md), and [`docs/PRODUCTION_READINESS.md`](docs/PRODUCTION_READINESS.md) for current truth.
+
 ## Executive Goal
 
 Build a premium productized-service landing page and interactive demo positioning Anil / Flowmarc Creative as a **Multi-Agent Architecture specialist** for teams whose AI agents are in development or production but are difficult to observe, govern, secure, or scale.

@@ -1,5 +1,7 @@
 # Sol validation handoff — premium frontend redesign
 
+> **Historical snapshot:** this handoff records an earlier redesign pass. Its branch, commit, preview URL, and asset counts are not current. Use [`README.md`](README.md), [`DESIGN.md`](DESIGN.md), and [`docs/PRODUCTION_READINESS.md`](docs/PRODUCTION_READINESS.md) for the current repository state.
+
 ## Preview
 
 - Branch: `agent/premium-frontend-redesign`

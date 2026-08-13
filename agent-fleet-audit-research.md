@@ -1,3 +1,7 @@
+# Agent Fleet Audit research
+
+> **Research record:** this document preserves the market and technical evidence used to shape the offer. Pricing, competitor information, and external links are time-sensitive and must be revalidated before publication. For implemented product status, use [`README.md`](README.md) and [`docs/PRODUCTION_READINESS.md`](docs/PRODUCTION_READINESS.md).
+
 ## Market Signal Validation
 
 Two distinct freelance postings anchor this opportunity: a "Senior AI Engineer – AI Agents, RAG & Workflow Automation" role at $75-120/hr, and a specialized "OpenClaw/Hermes Agent Fleet Engineer" niche at $35-80/hr focused on auditing and re-architecting already-deployed agent fleets. Market data confirms both are real, distinct pricing tiers rather than noise.
@@ -101,4 +105,3 @@ Pricing data for the specific "OpenClaw/Hermes" ecosystem could not be independe
 20. [AI Agent Security Guide 2026: Prompt Injection, Tool ...](https://jobsbyculture.com/blog/ai-agent-security-guide-2026) - The 2026 guide to AI agent security — OWASP Top 10 for agentic apps, prompt injection, tool poisonin...
 
 21. [Governing the Autonomous SOC: Securing AI Agents End- ...](https://security.googlecloudcommunity.com/webinars-75/governing-the-autonomous-soc-securing-ai-agents-end-to-end-on-google-s-agent-platform-8031) - The sequel to Prompt Injection to Playbook is here, and this time, we’re going up a level! While eve...
-
