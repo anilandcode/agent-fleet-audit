@@ -6,7 +6,7 @@ import { LandingMotion } from "@/components/landing-motion";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { MotionFaq } from "@/components/motion-faq";
 import { MotionAnchor, MotionCard, MotionProvider } from "@/components/motion-ui";
-import { ArchitectureFlow, FleetTopology, HeroTerrain } from "@/components/system-visuals";
+import { ArchitectureFlow } from "@/components/system-visuals";
 
 const capabilities = ["Architecture", "Evidence", "Policy", "Cost", "Security", "Reliability"];
 
@@ -87,6 +87,14 @@ function ExpansionAsset({ asset, alt, className, eager = false }: { asset: strin
   </picture>;
 }
 
+function CorrectionAsset({ asset, alt, className }: { asset: string; alt: string; className?: string }) {
+  const root = "/media/agent-fleet/visual-correction";
+  return <picture className={className}>
+    <source srcSet={`${root}/${asset}.avif`} type="image/avif" />
+    <img src={`${root}/${asset}.webp`} alt={alt} loading="lazy" decoding="async" />
+  </picture>;
+}
+
 export function LandingPage() {
   return <MotionProvider><LandingMotion>
     <div className="reference-stage">
@@ -100,7 +108,7 @@ export function LandingPage() {
               <MotionAnchor href="#controls">Controls</MotionAnchor>
               <MotionAnchor href="#engagements">Engagements</MotionAnchor>
             </div>
-            <MotionAnchor href="#diagnostic" className="button button-quiet nav-cta" arrow="↗">Request a diagnostic</MotionAnchor>
+            <MotionAnchor href="#diagnostic" className="button button-quiet nav-cta">Request a diagnostic</MotionAnchor>
             <MobileNavigation />
           </nav>
           <i className="header-progress" data-header-progress aria-hidden="true" />
@@ -110,21 +118,15 @@ export function LandingPage() {
           <section className="hero-chamber shell" data-hero-section>
             <div className="hero-frame" data-hero-art>
               <ExpansionAsset className="hero-raster" asset="hero-intelligence" alt="" eager />
-              <div className="hero-frame-glow" data-ambient aria-hidden="true" />
-              <div className="hero-frame-line hero-frame-line-a" aria-hidden="true" />
-              <div className="hero-frame-line hero-frame-line-b" aria-hidden="true" />
-              <span className="hero-system-label label-input">Policy-governed input</span>
-              <span className="hero-system-label label-output">Connected evidence layer</span>
               <div className="hero-centered-copy">
                 <span className="kicker" data-hero-kicker>Governed multi-agent operations</span>
                 <h1 data-hero-title>Your agents.<br />Your evidence.<br /><em>Your control.</em></h1>
                 <p data-hero-copy>Make every agent decision traceable before it becomes an operational or compliance problem.</p>
                 <div className="hero-actions" data-hero-actions>
-                  <MotionAnchor href="#diagnostic" className="button button-primary" arrow="↗">Request a diagnostic</MotionAnchor>
-                  <Link href="/app" className="quiet-link">Open control plane <b>→</b></Link>
+                  <MotionAnchor href="#diagnostic" className="button button-primary">Request a diagnostic</MotionAnchor>
+                  <Link href="/app" className="quiet-link">Open control plane</Link>
                 </div>
               </div>
-              <HeroTerrain />
             </div>
           </section>
 
@@ -137,8 +139,8 @@ export function LandingPage() {
               <span className="kicker">A governed operating model</span>
               <h2>Agent Fleet Audit is how teams govern <em>production agent systems.</em></h2>
               <p>It replaces fragmented logs and individual memory with a connected record of context, evidence, policy, cost, and accountable outcomes.</p>
-              <div className="editorial-callout"><b>→</b><span>You have built the agents.<br />Now make the system defensible.</span></div>
-              <MotionAnchor href="#platform" className="button button-quiet" arrow="↘">Discover the platform</MotionAnchor>
+              <div className="editorial-callout"><span>You have built the agents.<br />Now make the system defensible.</span></div>
+              <MotionAnchor href="#platform" className="button button-quiet">Discover the platform</MotionAnchor>
             </div>
             <div className="architecture-portrait" data-architecture-art>
               <ExpansionAsset className="editorial-raster" asset="editorial-intelligence" alt="An original abstract intelligence form made from graphite contours and fine evidence filaments." />
@@ -160,7 +162,7 @@ export function LandingPage() {
               {capabilityCards.slice(0, 4).map(([title, copy], index) => <article className="mosaic-card" key={title}><span>0{index + 1}</span><h3>{title}</h3><p>{copy}</p></article>)}
               {capabilityCards.slice(4).map(([title, copy], index) => <article className="mosaic-card mosaic-card-bottom" key={title}><span>0{index + 5}</span><h3>{title}</h3><p>{copy}</p></article>)}
               <figure className="decision-visual">
-                <ResponsiveAsset asset="architecture-mosaic" alt="An abstract connected decision record made of layered graphite planes, contour lines, and evidence nodes." />
+                <CorrectionAsset asset="decision-record-architecture" alt="A connected decision record flowing through layered graphite evidence planes." />
                 <figcaption><span>Live evidence topology</span><b>Source → policy → approval → outcome</b></figcaption>
               </figure>
             </div>
@@ -174,20 +176,24 @@ export function LandingPage() {
             </div>
             <div className="architecture-board">
               <MotionCard className="architecture-panel tenant-panel">
+                <CorrectionAsset className="architecture-panel-image" asset="architecture-tenant" alt="A layered evidence vault representing an isolated single-tenant operating boundary." />
                 <div className="architecture-panel-copy"><span>01 / Isolation</span><h3>Single-tenant architecture</h3><p>Your policies, traces, and operational memory remain inside a governed boundary.</p></div>
-                <div className="tenant-diagram" aria-hidden="true"><small>Customer tenant</small><i /><div><b>Evidence memory</b><b>Agent fleet</b><b>Policy gates</b></div><em>Dedicated environment</em></div>
+                <span className="architecture-panel-label">Isolated boundary</span>
               </MotionCard>
               <MotionCard className="architecture-panel collaboration-panel">
+                <CorrectionAsset className="architecture-panel-image" asset="architecture-collaboration" alt="A coordinated field of agent nodes contributing to a shared governed record." />
                 <div className="architecture-panel-copy"><span>02 / Orchestration</span><h3>Multi-agent collaboration</h3><p>Agents coordinate through explicit context, evidence, and approval paths.</p></div>
-                <div className="collaboration-map" aria-hidden="true"><i className="map-core">Shared record</i><b className="map-tag map-ops">Ops</b><b className="map-tag map-legal">Legal</b><b className="map-tag map-risk">Risk</b><b className="map-tag map-strategy">Strategy</b></div>
+                <span className="architecture-panel-label">Shared record</span>
               </MotionCard>
               <MotionCard className="architecture-panel audit-panel">
+                <CorrectionAsset className="architecture-panel-image" asset="architecture-audit" alt="Layered evidence surfaces connected to one persistent audit source." />
                 <div className="architecture-panel-copy"><span>03 / Provenance</span><h3>Built-in auditability</h3><p>Versioned evidence makes every decision traceable and replayable.</p></div>
-                <div className="audit-layers" aria-hidden="true"><i /><i /><i /><b>V1</b><b>V2</b><b>V3</b></div>
+                <span className="architecture-panel-label">Evidence chain</span>
               </MotionCard>
               <MotionCard className="architecture-panel routing-panel">
+                <CorrectionAsset className="architecture-panel-image" asset="architecture-routing" alt="A provider-neutral fleet core routing governed signals across multiple nodes." />
                 <div className="architecture-panel-copy"><span>04 / Portability</span><h3>Provider-neutral routing</h3><p>Model choices can change without breaking the evidence contract.</p></div>
-                <div className="routing-orbit" aria-hidden="true"><i /><b>Primary</b><b>Fallback</b><b>Private</b></div>
+                <span className="architecture-panel-label">Routing contract</span>
               </MotionCard>
             </div>
           </section>
@@ -205,7 +211,7 @@ export function LandingPage() {
                 </article>)}
               </div>
             </div>
-            <p className="ownership-swipe-hint shell">Swipe to inspect the six failure patterns →</p>
+            <p className="ownership-swipe-hint shell">Swipe to inspect the six failure patterns</p>
           </section>
 
           <section className="owned-intelligence shell chapter" data-owned-intelligence>
@@ -218,10 +224,10 @@ export function LandingPage() {
               <span className="owned-core">Decision<br />record</span>
               <b className="owned-tag owned-legal">Legal</b><b className="owned-tag owned-ops">Ops</b><b className="owned-tag owned-strategy">Strategy</b><b className="owned-tag owned-risk">Risk</b><b className="owned-tag owned-policy">Policies</b><b className="owned-tag owned-security">Security</b>
             </div>
-            <div className="brand-world" aria-label="Architectural environments representing governed operational intelligence">
-              <MotionCard className="brand-scene brand-scene-wide"><ExpansionAsset asset="brand-lobby" alt="A cinematic graphite lobby with a restrained champagne wall light and original circular relief." /><div><span>01 / Context</span><h3>A clear operating world</h3><p>Responsibility becomes visible before action begins.</p></div></MotionCard>
-              <MotionCard className="brand-scene"><ExpansionAsset asset="brand-escalator" alt="A dark graphite escalator hall with thin olive light lines and a blank illuminated wall." /><div><span>02 / Handoffs</span><h3>Movement with memory</h3><p>Every transition retains its operational context.</p></div></MotionCard>
-              <MotionCard className="brand-scene"><ExpansionAsset asset="brand-gallery" alt="A quiet graphite gallery with an abstract empty light panel and champagne illumination." /><div><span>03 / Evidence</span><h3>Signals that persist</h3><p>Reviewable evidence stays attached to the outcome.</p></div></MotionCard>
+            <div className="brand-world" aria-label="AI systems representing governed operational intelligence">
+              <MotionCard className="brand-scene brand-scene-wide"><CorrectionAsset asset="ai-clear-world" alt="Three bounded intelligence fields connected through a disciplined governed record." /><div><span>01 / Context</span><h3>A clear operating world</h3><p>Responsibility becomes visible before action begins.</p></div></MotionCard>
+              <MotionCard className="brand-scene"><CorrectionAsset asset="ai-movement-memory" alt="A persistent intelligent signal retaining memory across a sequence of agent states." /><div><span>02 / Handoffs</span><h3>Movement with memory</h3><p>Every transition retains its operational context.</p></div></MotionCard>
+              <MotionCard className="brand-scene"><CorrectionAsset asset="ai-signals-persist" alt="Evidence pulses remaining attached to a durable central outcome over time." /><div><span>03 / Evidence</span><h3>Signals that persist</h3><p>Reviewable evidence stays attached to the outcome.</p></div></MotionCard>
             </div>
           </section>
 
@@ -240,8 +246,7 @@ export function LandingPage() {
           </section>
 
           <section className="transition-chapter" data-transition-section>
-            <div className="transition-glow" data-ambient aria-hidden="true" />
-            <FleetTopology />
+            <CorrectionAsset className="transition-quantum" asset="transition-quantum-core" alt="" />
             <div className="transition-copy" data-reveal><span className="kicker">From fragments to a fleet</span><h2>What changes with<br /><em>Agent Fleet Audit?</em></h2></div>
           </section>
 
@@ -250,7 +255,7 @@ export function LandingPage() {
               <span className="kicker">Built for accountability</span>
               <h2>Outputs are not enough.<br /><em>Show the decision path.</em></h2>
               <p>Production agents need a record that survives scrutiny: what was requested, which data was used, which policy applied, and why an action did or did not happen.</p>
-              <MotionAnchor href="#platform" className="button button-quiet" arrow="↓">Explore the platform</MotionAnchor>
+              <MotionAnchor href="#platform" className="button button-quiet">Explore the platform</MotionAnchor>
             </div>
             <ol className="evidence-path" data-timeline>
               <i className="timeline-progress" data-timeline-line aria-hidden="true" />
@@ -275,9 +280,9 @@ export function LandingPage() {
               <p>A focused services offer for technical teams moving agents from promising prototype to governed production system.</p>
             </div>
             <div className="engagement-grid" data-stagger>
-              <article><span>01 / Diagnostic</span><h3>Fleet Diagnostic</h3><strong>From $1,500</strong><p>3–5 business days. Architecture map, readiness score, prioritized findings, and a technical readout.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request diagnostic <b>↗</b></a></article>
-              <article className="featured-offer"><span>02 / Remediation</span><h3>Stabilization Sprint</h3><strong>From $7,500</strong><p>2–3 weeks. Trace repair, tool controls, budgets, approvals, and an implementation-ready operating model.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Stabilization">Scope a sprint <b>↗</b></a></article>
-              <article><span>03 / Governance</span><h3>Managed Governance</h3><strong>From $2,500/mo</strong><p>Ongoing health reviews, anomaly monitoring, control validation, and quarterly resilience exercises.</p><a href="mailto:hello@flowmarc.com?subject=Managed%20Agent%20Governance">Discuss governance <b>↗</b></a></article>
+              <article><span>01 / Diagnostic</span><h3>Fleet Diagnostic</h3><strong>From $1,500</strong><p>3–5 business days. Architecture map, readiness score, prioritized findings, and a technical readout.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request diagnostic</a></article>
+              <article className="featured-offer"><span>02 / Remediation</span><h3>Stabilization Sprint</h3><strong>From $7,500</strong><p>2–3 weeks. Trace repair, tool controls, budgets, approvals, and an implementation-ready operating model.</p><a href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Stabilization">Scope a sprint</a></article>
+              <article><span>03 / Governance</span><h3>Managed Governance</h3><strong>From $2,500/mo</strong><p>Ongoing health reviews, anomaly monitoring, control validation, and quarterly resilience exercises.</p><a href="mailto:hello@flowmarc.com?subject=Managed%20Agent%20Governance">Discuss governance</a></article>
             </div>
           </section>
 
@@ -293,9 +298,9 @@ export function LandingPage() {
             </div>
             <div className="shell utility-grid" data-reveal>
               <div className="proof-assets">
-                <a href="/api/v1/reports/demo/export"><span>01</span><strong>Sample redacted diagnostic report</strong><b>Download ↗</b></a>
-                <a href="#platform"><span>02</span><strong>Vendor-risk audit replay</strong><b>Explore ↘</b></a>
-                <a href="#controls"><span>03</span><strong>Five control areas to inspect</strong><b>Review ↘</b></a>
+                <a href="/api/v1/reports/demo/export"><span>01</span><strong>Sample redacted diagnostic report</strong><b>Download</b></a>
+                <a href="#platform"><span>02</span><strong>Vendor-risk audit replay</strong><b>Explore</b></a>
+                <a href="#controls"><span>03</span><strong>Five control areas to inspect</strong><b>Review</b></a>
               </div>
               <MotionFaq />
             </div>
@@ -303,7 +308,7 @@ export function LandingPage() {
 
           <footer className="reference-footer">
             <div className="shell footer-main">
-              <div><BrandMark /><h2>Governed. Traceable. Yours.</h2><MotionAnchor className="button button-quiet" href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic" arrow="↗">Request a diagnostic</MotionAnchor></div>
+              <div><BrandMark /><h2>Governed. Traceable. Yours.</h2><MotionAnchor className="button button-quiet" href="mailto:hello@flowmarc.com?subject=Agent%20Fleet%20Diagnostic">Request a diagnostic</MotionAnchor></div>
               <nav aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#controls">Controls</a><a href="#engagements">Engagements</a><Link href="/app">Control plane</Link></nav>
               <div className="footer-legal"><span>Production agent architecture</span><span>Not a security certification</span></div>
             </div>

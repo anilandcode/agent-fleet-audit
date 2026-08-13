@@ -12,9 +12,9 @@ export function MotionProvider({ children }: Readonly<{ children: ReactNode }>) 
   </LazyMotion>;
 }
 
-type MotionAnchorProps = Omit<HTMLMotionProps<"a">, "children"> & { arrow?: string; children: ReactNode };
+type MotionAnchorProps = Omit<HTMLMotionProps<"a">, "children"> & { children: ReactNode };
 
-export function MotionAnchor({ children, className, arrow, ...props }: MotionAnchorProps) {
+export function MotionAnchor({ children, className, ...props }: MotionAnchorProps) {
   return <m.a
     className={className}
     initial="idle"
@@ -23,7 +23,7 @@ export function MotionAnchor({ children, className, arrow, ...props }: MotionAnc
     variants={{ idle: { y: 0 }, hover: { y: -2 } }}
     transition={{ type: "spring", stiffness: 380, damping: 26 }}
     {...props}
-  >{children}{arrow && <m.b aria-hidden="true" variants={{ idle: { x: 0, y: 0 }, hover: { x: 3, y: -3 } }}>{arrow}</m.b>}</m.a>;
+  >{children}</m.a>;
 }
 
 type MotionCardProps = HTMLMotionProps<"article">;
@@ -32,9 +32,6 @@ export function MotionCard({ children, className, ...props }: MotionCardProps) {
   return <m.article
     data-motion-owned=""
     className={className}
-    whileHover={{ y: -5, scale: 1.006 }}
-    whileTap={{ scale: .995 }}
-    transition={{ type: "spring", stiffness: 260, damping: 28 }}
     {...props}
   >{children}</m.article>;
 }

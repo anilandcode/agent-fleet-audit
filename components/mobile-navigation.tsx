@@ -7,7 +7,7 @@ const links = [
   ["Platform", "#platform"],
   ["Controls", "#controls"],
   ["Engagements", "#engagements"],
-  ["Request a diagnostic ↗", "#diagnostic"],
+  ["Request a diagnostic", "#diagnostic"],
 ];
 
 export function MobileNavigation() {

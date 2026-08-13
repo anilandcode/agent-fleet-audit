@@ -19,24 +19,22 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
     }, (context) => {
       const { allowMotion } = context.conditions as { allowMotion: boolean; reduceMotion: boolean };
       if (!allowMotion) {
-        gsap.set("[data-reveal], [data-stagger] > *, [data-mosaic] > *, [data-architecture-board] > *, .topology-nodes circle, .terrain-line, [data-header-progress]", { clearProps: "all" });
+        gsap.set("[data-reveal], [data-stagger] > *, [data-mosaic] > *, [data-architecture-board] > *, [data-header-progress]", { clearProps: "all" });
         gsap.set("[data-timeline-line]", { scaleY: 1, transformOrigin: "top" });
         return;
       }
 
       const hero = gsap.timeline({ defaults: { ease: "power3.out" } });
       hero.from("[data-hero-art]", { autoAlpha: 0, scale: 1.012, duration: 1.1 })
-        .from(".hero-raster img", { scale: 1.06, yPercent: 4, duration: 1.5 }, "<")
         .from("[data-hero-kicker], [data-hero-title], [data-hero-copy], [data-hero-actions]", { autoAlpha: 0, y: 20, duration: .75, stagger: .09 }, "<.12")
-        .from(".terrain-chip, .hero-system-label, .terrain-node", { autoAlpha: 0, scale: .75, duration: .5, stagger: .045 }, "<.28")
         .from("[data-capability-rail] > *", { autoAlpha: 0, y: 8, duration: .45, stagger: .045 }, "<.18");
 
-      gsap.utils.toArray<SVGPathElement>(".terrain-line, .terrain-route, .architecture-route, .trace-path").forEach((path) => {
+      gsap.utils.toArray<SVGPathElement>(".architecture-route").forEach((path) => {
         const length = path.getTotalLength();
         gsap.fromTo(path, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, duration: 1.6, ease: "power2.inOut", delay: .25 });
       });
 
-      gsap.to(".terrain-node, .architecture-node, .topology-nodes circle, .system-node", { scale: 1.35, autoAlpha: .72, duration: 2.6, ease: "sine.inOut", repeat: -1, yoyo: true, stagger: { each: .09, from: "random" }, transformOrigin: "50% 50%" });
+      gsap.to(".architecture-node", { scale: 1.35, autoAlpha: .72, duration: 2.6, ease: "sine.inOut", repeat: -1, yoyo: true, stagger: { each: .09, from: "random" }, transformOrigin: "50% 50%" });
       gsap.to("[data-ambient]", { xPercent: 5, yPercent: -4, autoAlpha: .7, duration: 8, ease: "sine.inOut", repeat: -1, yoyo: true, stagger: 1.1 });
       gsap.fromTo("[data-header-progress]", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: "[data-site-canvas]", start: "top top", end: "bottom bottom", scrub: .2 } });
 
@@ -50,9 +48,9 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
       gsap.from("[data-mosaic] > *", { autoAlpha: 0, y: 20, duration: .68, ease: "power3.out", stagger: .075, scrollTrigger: { trigger: "[data-mosaic]", start: "clamp(top 84%)", once: true } });
       gsap.from("[data-architecture-board] .architecture-panel", { autoAlpha: 0, duration: .8, stagger: .08, scrollTrigger: { trigger: "[data-architecture-board]", start: "top 76%", once: true } });
       gsap.fromTo("[data-timeline-line]", { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: "[data-timeline]", start: "top 72%", end: "bottom 35%", scrub: .65 } });
-      gsap.from(".topology-nodes circle", { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%", duration: .55, stagger: .04, scrollTrigger: { trigger: "[data-transition-section]", start: "top 58%", once: true } });
+      gsap.from(".transition-quantum", { autoAlpha: 0, duration: 1.1, scrollTrigger: { trigger: "[data-transition-section]", start: "top 62%", once: true } });
       gsap.from("[data-owned-topology] .owned-tag", { autoAlpha: 0, scale: .88, duration: .55, stagger: .06, scrollTrigger: { trigger: "[data-owned-topology]", start: "top 70%", once: true } });
-      gsap.from(".brand-scene picture", { autoAlpha: 0, scale: 1.055, duration: .95, stagger: .08, scrollTrigger: { trigger: ".brand-world", start: "top 76%", once: true } });
+      gsap.from(".brand-scene picture", { autoAlpha: 0, duration: .95, stagger: .08, scrollTrigger: { trigger: ".brand-world", start: "top 76%", once: true } });
     });
 
     media.add({
@@ -61,8 +59,6 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
     }, (context) => {
       const { desktop, allowMotion } = context.conditions as { desktop: boolean; allowMotion: boolean };
       if (!desktop || !allowMotion) return;
-
-      gsap.from(".topology-edges line", { strokeDasharray: 420, strokeDashoffset: 420, duration: 1, stagger: .025, ease: "none", scrollTrigger: { trigger: "[data-transition-section]", start: "top 68%", end: "center center", scrub: .7 } });
 
       const track = root.current?.querySelector<HTMLElement>("[data-ownership-track]");
       const stage = root.current?.querySelector<HTMLElement>("[data-ownership-stage]");
@@ -84,13 +80,6 @@ export function LandingMotion({ children }: Readonly<{ children: React.ReactNode
         });
       }
 
-      gsap.to(".hero-terrain", { yPercent: 9, ease: "none", scrollTrigger: { trigger: "[data-hero-section]", start: "top top", end: "bottom top", scrub: .6 } });
-      gsap.to(".hero-raster img", { yPercent: 2.5, scale: 1.02, ease: "none", scrollTrigger: { trigger: "[data-hero-section]", start: "top top", end: "bottom top", scrub: .6 } });
-      gsap.to("[data-architecture-art] .architecture-flow", { yPercent: -5, ease: "none", scrollTrigger: { trigger: "[data-architecture-art]", start: "top bottom", end: "bottom top", scrub: .65 } });
-      gsap.utils.toArray<HTMLElement>(".memory-card picture").forEach((picture, index) => {
-        gsap.fromTo(picture, { yPercent: 5 + index * 2, scale: 1.035 }, { yPercent: -3, scale: 1, ease: "none", scrollTrigger: { trigger: picture.parentElement, start: "top bottom", end: "bottom top", scrub: .7 } });
-      });
-      gsap.to("[data-product-window]", { y: -18, ease: "none", scrollTrigger: { trigger: "[data-platform-section]", start: "top bottom", end: "bottom top", scrub: .65 } });
     });
 
     let active = true;
