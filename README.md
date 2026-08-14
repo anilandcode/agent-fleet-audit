@@ -70,6 +70,7 @@ pnpm verify
 | [Deployment](docs/DEPLOYMENT.md) | Vercel preview/production behavior and environment configuration |
 | [Production readiness](docs/PRODUCTION_READINESS.md) | Current maturity, limitations, and acceptance gates |
 | [Generated asset inventory](docs/ASSET_INVENTORY.md) | Used, unused, and reference image provenance |
+| [Visual source library](assets/visual-library/README.md) | Full-resolution recoverable masters, inspiration copies, and checksums |
 | [Production gates](docs/production-gates.md) | External systems and rehearsals required before live enforcement |
 | [Research](agent-fleet-audit-research.md) | Market and service-category research |
 | [Original end-to-end plan](multi-agent-architecture-end-to-end-plan.md) | Product, offer, demo, and delivery rationale |
@@ -85,6 +86,7 @@ The deployed demo is deterministic by design. It does not yet run a live orchest
 - Active generated images: `public/media/agent-fleet/{reference-clone,visual-correction,visual-expansion}/`
 - Retained unused generated variants: `public/media/agent-fleet/archive/unused/`
 - User-supplied inspiration screenshots: `Images/`
+- Full-resolution recoverable source library: `assets/visual-library/` (37 generated masters and 12 reference copies; never publicly served)
 - Complete status and provenance: [Asset inventory](docs/ASSET_INVENTORY.md)
 
 Generated assets contain no embedded customer logos, third-party branding, or copied reference text. Reference imagery informed layout, material, and atmosphere only.

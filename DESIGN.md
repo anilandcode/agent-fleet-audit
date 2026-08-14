@@ -94,7 +94,7 @@ Raster artwork is generated, original, and text-free. Interface labels, logos, p
 - `visual-correction`: capability, architecture, AI-concept, quantum, and demo-tab visuals.
 - `visual-expansion`: hero, editorial, and institutional-memory visuals.
 
-Every active pair supplies AVIF first and WebP fallback. The hero AVIF is preloaded; below-the-fold images are lazy loaded. Unused generated variants are preserved under `public/media/agent-fleet/archive/unused/`. User-provided inspiration remains in `Images/`. See [Generated asset inventory](docs/ASSET_INVENTORY.md).
+Every active pair supplies AVIF first and WebP fallback. The hero AVIF is preloaded; below-the-fold images are lazy loaded. Unused generated variants are preserved under `public/media/agent-fleet/archive/unused/`. User-provided inspiration remains in `Images/`. The exact highest-resolution files recoverable for all 37 generated artworks and 12 references are duplicated privately in [`assets/visual-library/`](assets/visual-library/README.md), outside website delivery. See [Generated asset inventory](docs/ASSET_INVENTORY.md).
 
 ## Motion and interaction
 
